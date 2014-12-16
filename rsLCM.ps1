@@ -73,6 +73,7 @@ else {
    powershell.exe "C:\DevOps\rsProvisioning\makecert.exe" -r -pe -n $cN -sky exchange -ss my $("C:\DevOps", $d.mR, "Certificates\Credentials","$ObjectGuid.cer"  -join '\'), -sr localmachine, -len 2048
    Start -Wait "C:\Program Files (x86)\Git\bin\git.exe" -ArgumentList "add $("C:\DevOps", $d.mR, "Certificates\Credentials","$ObjectGuid.cer"  -join '\')"
    Start -Wait "C:\Program Files (x86)\Git\bin\git.exe" -ArgumentList "commit -a -m `"pushing $ObjectGuid.crt`""
+   Start-Sleep ([System.Math]::Round((Get-Random -min 0 -Maximum 1.0),2)*100)   
    Start -Wait "C:\Program Files (x86)\Git\bin\git.exe" -ArgumentList "fetch origin $($d.branch_rsConfigs)"
    Start -Wait "C:\Program Files (x86)\Git\bin\git.exe" -ArgumentList "merge remotes/origin/$($d.branch_rsConfigs)"
    Start -Wait "C:\Program Files (x86)\Git\bin\git.exe" -ArgumentList "push origin $($d.branch_rsConfigs)"
